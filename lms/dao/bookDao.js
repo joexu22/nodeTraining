@@ -23,6 +23,23 @@ exports.addBook = function(book, cb){
       });
 };
 
+exports.updateBook = function(bookId, book, cb){
+    db.beginTransaction(function(err){
+        if(err) cb(err, null);
+
+        db.query('update lms.book set title = ?, author = ? where book_id = ?', [book.title, book.author, bookId], function(err, res){
+          if(err){
+            db.rollback(function(err, res) {
+              cb(err, res);
+            });
+          }
+          db.commit(function(err, res){
+            cb(err, res);
+          });
+        });
+    });
+};
+
 exports.removeBook = function(bookId, cb){
     db.beginTransaction(function(err){
         if(err) cb(err, null);

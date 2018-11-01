@@ -15,8 +15,8 @@ app.use(function(req, res, next) {
 app.use(bodyParser.json());
 
 app.use(require('./controllers/bookController'));
-
 app.use(require('./controllers/authorController'));
+app.use(require('./controllers/publisherController'));
 
 app.listen(3000);
 console.log('Server running in port: 3000 ...')

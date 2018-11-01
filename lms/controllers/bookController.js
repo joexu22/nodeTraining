@@ -20,7 +20,17 @@ routes.post('/book', function(req, res){
     res.status(201);
     res.send('Add Book Successful!');
   });
+});
 
+routes.put('/book/:id', function(req, res){
+  var book = req.body;
+  bookDao.updateBook(req.params.id, book, function(err, result){
+    if(err){
+      res.status(400);
+      res.send('Update Book Failed!');
+    }
+    res.send('Update Book Successful!');
+  });
 });
 
 routes.delete('/book/:id', function(req, res){
